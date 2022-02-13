@@ -1,4 +1,4 @@
 name = 'Nick'
 lname = 'Siryk'
 
-print(' '.join([name, lname]))
+print('Hello,', ' '.join([name, lname]))

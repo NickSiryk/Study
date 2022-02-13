@@ -12,9 +12,8 @@ print('Good day {}! {} is a perfect day to learn some python.'.format(name, date
 # 3rd method (f-string)
 print(f'Good day {name}! {date} is a perfect day to learn some python.')
 
-# 4th method (tamplate)
+# 4th method (Template)
 from string import Template
-
 pr = 'Good day $name! $date is a perfect day to learn some python.'
 pr = Template(pr).substitute(name=name, date=date)
 print(pr)
