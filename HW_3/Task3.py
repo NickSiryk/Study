@@ -9,7 +9,10 @@ while True:
         print('Bye')
         break
     elif check == name:
-        print('NOSTRADAMUS!')
+        if count == 1:
+            print('NOSTRADAMUS!')
+        else:
+            print('Correct!')
         print(f'You made {count} attempts.')
         break
     else:

@@ -1,6 +1,6 @@
 a = 0
 while a < 6:
-    print('If You want to stop all off this, just print "Q"')
+    print('If You want to stop all of this, just print "Q"')
     long_string = input('Write Your string, please: ')
     if long_string == 'Q':
         print('See You!')
