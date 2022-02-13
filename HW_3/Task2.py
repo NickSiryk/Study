@@ -1,7 +1,7 @@
 while True:
     tel_num = input('Print Your phone number here: +38').strip()
     if not tel_num.isdigit():
-        print('There is letter. Try, please, one more time!')
+        print('There is a letter. Try, please, one more time!')
     elif len(tel_num) < 10:
         print('Too short. Try, please, one more time!')
     elif len(tel_num) > 10:
