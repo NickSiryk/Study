@@ -1,21 +1,25 @@
+'''
+MODEL FILE
+
+A simple prototype of a TV controller in Python
+'''
+
+
 class TVController:
-    '''
-    A simple prototype of a TV controller in Python
-    '''
 
     def __init__(self, loc):
         '''
         :param loc: list of channels
         '''
         self.loc = loc
-        self.n = 0
+        self.N = 0  # current channel position
 
     def first_channel(self):
         '''
         turns on the first channel from the list
         :return: current channel
         '''
-        self.n = 0
+        self.N = 0
         return self.current_channel()
 
     def last_channel(self):
@@ -23,7 +27,7 @@ class TVController:
         turns on the last channel from the list
         :return: current channel
         '''
-        self.n = len(self.loc) - 1
+        self.N = len(self.loc) - 1
         return self.current_channel()
 
     def turn_channel(self, n):
@@ -32,31 +36,32 @@ class TVController:
         :param n: number of chsnnel
         :return: current channel
         '''
+        n -= 1  # correcting number for using as list marker
         if n >= len(self.loc):
             return self.first_channel()
-        elif n <= 0:
+        elif n < 0:
             return self.last_channel()
         else:
-            self.n = n - 1
+            self.N = n
             return self.current_channel()
 
     def next_channel(self):
         '''
         turns on the next channel
         '''
-        return self.turn_channel(self.n + 2)
+        return self.turn_channel(self.N + 2)
 
     def previous_channel(self):
         '''
-        turns on the previouns channel
+        turns on the previous channel
         '''
-        return self.turn_channel(self.n)
+        return self.turn_channel(self.N)
 
     def current_channel(self):
         '''
         :return: the name of the current channel.
         '''
-        return self.loc[self.n]
+        return self.loc[self.N]
 
     def is_exist(self, quest):
         '''
@@ -67,7 +72,7 @@ class TVController:
         '''
         quest = str(quest)
         if quest.isdigit():
-            if 1 < int(quest) < len(self.loc):
+            if 0 < int(quest) <= len(self.loc):
                 return 'Yes'
             else:
                 return 'No'
@@ -78,15 +83,5 @@ class TVController:
                 return 'No'
 
 
-CHANNELS = ["BBC", "Discovery", "TV1000"]
+CHANNELS = ["BBC", "Discovery", "TV1000", "CNN", "Euronews", "CNBC", "Reuters TV", "DW-TV", "SkyNews"]
 controller = TVController(CHANNELS)
-
-
-print(controller.first_channel() == "BBC")
-print(controller.last_channel() == "TV1000")
-print(controller.turn_channel(1) == "BBC")
-print(controller.next_channel() == "Discovery")
-print(controller.previous_channel() == "BBC")
-print(controller.current_channel() == "BBC")
-print(controller.is_exist(4) == "No")
-print(controller.is_exist("BBC") == "Yes")

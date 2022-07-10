@@ -54,7 +54,7 @@ class Book:
         self.year = year
         self.author = author
         author.add_book(self)
-        Book.amount += 1
+        self.__class__.amount += 1
 
     def __repr__(self):
         return f'{self.name} {self.year} ({self.author})'
@@ -63,7 +63,7 @@ class Book:
         return f'Book: {self.name}, year:{self.year}, by {self.author}'
 
     def __len__(self):
-        return Book.amount
+        return self.__class__.amount
 
 
 class Library:

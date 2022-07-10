@@ -1,0 +1,5 @@
+syntax: _first_ _second_ _proc_ -v
+_first_    - first argument
+_second_   - second argument
+_proc_     - symbol of procedure. "-", "+", "*", "/"
+-v       - optional long version

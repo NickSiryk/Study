@@ -1,0 +1,170 @@
+Task 1:
+Print a list of connected tables in the database.
+Answer:
+.table
+
+Task 2:
+Print all records from the customers table.
+Answer:
+select * from customers;
+
+Task 3:
+Show the first five records in the customers table.
+Answer:
+select * from customers limit 5;
+
+Task 4:
+Show the first five records in the customers table, displaying only three fields (columns) - first name, last name and country of residence of the customer.
+Answer:
+select firstname, lastname, country from customers limit 5;
+
+Task 5:
+Look up .help with the .mode command
+Answer:
+.help .mode
+
+Task 6:
+Set the output to column mode with the .mode command
+Answer:
+.mode column
+
+Task 7:
+Show the first fifteen records in the customers table, displaying only three fields (columns) - the name, surname and country of residence of the client.
+Answer:
+select firstname, lastname, country from customers limit 15;
+
+Task 8:
+Set output to box mode
+Answer:
+.mode box
+
+Task 9:
+Show the first fifteen records in the customers table, displaying only three fields (columns) - last name, first name and country of residence of the client.
+Answer:
+select firstname, lastname, country from customers limit 15;
+
+Task 10:
+Set the output to list mode with the .mode command
+Answer:
+.mode list
+
+Task 11:
+Records from the thirtieth to the fortieth in the customers table, displaying only three fields (columns) - the country of residence of the client, last name, first name.
+Answer:
+select country, lastname, firstname from customers limit 10 offset 30;
+
+Task 12:
+Set the output to csv mode using the .mode command
+Answer:
+.mode csv
+
+Task 13:
+Show the first fifteen records in the customers table, displaying only three fields (columns) - the name, surname and country of residence of the client, sorting the records by the country of residence of the client.
+Answer:
+select firstname, lastname, country from customers order by country limit 15; OR select firstname, lastname, country from customers where customerid between 0 and 15 order by country;	
+
+Task 14:
+Set the output to json mode with the .mode command
+Answer:
+.mode json
+
+Task 15:
+Show the first thirteen records in the customers table, displaying only four fields - id, first name, last name and country of residence of the customer.
+Answer:
+select customerid, firstname, lastname, country from customers limit 13;
+
+Task 16:
+Set output to markdown mode with .mode command (if your version of sqlite has it)
+Answer:
+.mode markdown
+
+Task 17:
+Show the twenty first records in the customers table, displaying only four fields - id, first name, last name and country of residence of the customer.
+Answer:
+select customerid, firstname, lastname, country from customers limit 20;
+
+Task 18:
+Set the output to table mode with the .mode command
+Answer:
+.mode table
+
+Task 19:
+Show the thirty first records in the customers table, displaying only four fields - id, first name, last name, and country of residence of the customer.
+Answer:
+select customerid, firstname, lastname, country from customers limit 30;
+
+Task 20:
+Set output to box mode
+Answer:
+.mode box
+
+Task 21:
+Show the thirty first records in the customers table, displaying only four fields - id, first name, last name and country of residence of the customer, sorting them by the customer's first name.
+Answer:
+select customerid, firstname, lastname, country from customers order by firstname limit 30; OR select customerid, firstname, lastname, country from customers where customerid between 0 and 30 order by firstname;
+
+Task 22:
+Show the twenty first records in the customers table, displaying only four fields - id, first name, last name and country of residence of the customer, sorting them by the country of residence of the customer.
+Answer:
+select customerid, firstname, lastname, country from customers order by country limit 20; OR select customerid, firstname, lastname, country from customers where customerid between 0 and 20 order by country;
+
+Task 23:
+Select from the customers table that returns in sequence all customers, sorted by name, who live in India
+Answer:
+select * from customers where country = 'India' order by firstname;
+
+Task 24:
+Make a selection from the customers table that lists consecutively all customers, sorted by last name, who live in Brazil
+Answer:
+select * from customers where country = 'Brazil' order by lastname;
+
+Task 25:
+Make a selection from the customers table that lists consecutively all customers, sorted by CustomerId, who live in Brazil or India
+Answer:
+select customerid, firstname, country from customers where country = 'Brazil' or country = 'India' order by customerid;
+
+Task 26:
+Who was hired most recently by the company? (table employees).
+Answer:
+select lastname, hiredate from employees order by hiredate desc limit 1;
+
+Task 27:
+Who is the youngest employee in the company?
+Answer:
+select lastname, birthdate from employees order by birthdate desc limit 1;
+
+Task 28:
+Print a list of clients and managers who serve them.
+Answer:
+select c.customerid, c.lastname, c.supportrepid, e.lastname from customers c cross join employees e ON c.supportrepid=e.employeeid;
+
+Task 29:
+Are there clients that no one serves?
+Answer:
+select c.customerid, c.lastname from customers c left join employees e ON c.supportrepid=e.employeeid where e.lastname is null;
+
+Task 30:
+Are there managers without clients?
+Answer:
+select e.lastname from employees e left join customers c ON e.employeeid=c.supportrepid where c.lastname is null;
+
+Task 31:
+Which artist has the most albums?
+Answer:
+select Count(albumid), a.Name from albums al left join artists a on al.artistid=a.artistid group by al.artistid order by count(albumid) desc limit 1;
+
+Task 32:
+TOP-10 artists by number of albums?
+Answer:
+select Count(albumid), a.Name from albums al left join artists a on al.artistid=a.artistid group by al.artistid order by count(albumid) desc limit 10;
+
+Task 33:
+Find out the 10 largest orders and the amounts that were paid.
+Answer:
+select sum(total), InvoiceDate, BillingAddress, BillingCity, BillingCountry, BillingPostalCode, CustomerID from invoices group by customerid order by sum(total) desc limit 10;
+
+Task 34:
+Find out the names of customers and the amount of their orders. Display the 10 largest orders and the first and last names of those who made them.
+Answer:
+select sum(i.total), i.InvoiceDate, i.BillingAddress, i.BillingCity, i.BillingCountry, i.BillingPostalCode, c.lastname, c.firstname from invoices i left join customers c on i.customerid=c.customerid group by i.customerid order by sum(i.total) desc limit 10;
+
